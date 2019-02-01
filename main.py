@@ -33,8 +33,8 @@ async def ping(ctx):
 
 
 @bot.command()
-async def test(ctx):
-    embed = discord.Embed(title="", description="", colour=discord.Color.green())
+async def test(ctx, *, word):
+    embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
     embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 
     await ctx.send(embed=embed)

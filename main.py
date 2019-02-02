@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 bot = commands.Bot(command_prefix="-")
+bot.change_presence()
 
 TOKEN = os.getenv('token')
 
@@ -33,7 +34,7 @@ async def ping(ctx):
 
 
 @bot.command()
-async def test(ctx, *, word):
+async def test(ctx, *, word = None):
     embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
     embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 

@@ -12,6 +12,7 @@ load_dotenv()
 
 r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16113.c16.us-east-1-2.ec2.cloud.redislabs.com:16113/cavemanrockx-big-bot")
 bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."))
+extensions = ["Uno"]
 TOKEN = os.getenv('token')
 
 
@@ -42,4 +43,28 @@ async def test(ctx, *, word = ""):
 
     await ctx.send(embed=embed)
 
-bot.run(TOKEN)
+
+@bot.command()
+async def load(extension):
+    try:
+        bot.load_extension(f"cogs.{extension}")
+    except Exception as error:
+        print(chalk.red(f"{extension} cannot be loaded. {error}"))
+
+
+@bot.command()
+async def unload(extension):
+    try:
+        bot.unload_extension(f"cogs.{extension}")
+    except Exception as error:
+        print(chalk.red(f"{extension} cannot be loaded. {error}"))
+
+
+if __name__ == "__main__":
+    for extension in extensions:
+        try:
+            bot.load_extension(f"cogs.{extension}")
+        except Exception as error:
+            print(chalk.red(f"{extension} cannot be loaded. {error}"))
+
+    bot.run(TOKEN)

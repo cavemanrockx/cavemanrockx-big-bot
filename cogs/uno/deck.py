@@ -15,6 +15,7 @@ class Card:
 
     _color: str
     _type: str
+    _image: str
 
     def __init__(self, color, type):
         self._color = color
@@ -71,19 +72,17 @@ class Deck:
 
         self._deck = []
 
-        while True:
-            for color in self._color:
-                if color != "black":
-                    self._deck.append(Card(color, self._types[0]))
-                    for i in range(12):
-                        self._deck.append(Card(color, self._types[i + 1]))
-                        self._deck.append(Card(color, self._types[i + 1]))
+        for color in self._color:
+            if color != "black":
+                self._deck.append(Card(color, self._types[0]))
+                for i in range(12):
+                    self._deck.append(Card(color, self._types[i + 1]))
+                    self._deck.append(Card(color, self._types[i + 1]))
 
-                elif color == "black":
-                    for i in range(4):
-                        self._deck.append(Card(color, self._types[13]))
-                        self._deck.append(Card(color, self._types[14]))
-            break
+            elif color == "black":
+                for i in range(4):
+                    self._deck.append(Card(color, self._types[13]))
+                    self._deck.append(Card(color, self._types[14]))
 
     def shuffle(self):
         shuffle(self._deck)
@@ -94,6 +93,12 @@ class Deck:
     def add(self, card: Card):
         self._deck.append(card)
 
+    def last_card(self):
+        return self._deck[len(self._deck)-1]
+
+    def deck_list(self):
+        return self._deck
+
     def __len__(self):
         return len(self._deck)
 
@@ -102,6 +107,15 @@ class Deck:
 
     def __repr__(self):
         return str(self._deck)
+
+    def __add__(self, other):
+
+        list = other.deck_list()
+        for i in list:
+            self._deck.append(i)
+
+        return self._deck
+
 
 
 class Hand:
@@ -124,6 +138,9 @@ class Hand:
     def remove(self, card: Card):
         index = self._hand.index(card)
         self._hand.pop(index)
+
+    def __len__(self):
+        return len(self._hand)
 
     def show(self):
         return self._hand

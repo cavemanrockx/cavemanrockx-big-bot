@@ -53,8 +53,9 @@ class Deck:
     _types: types of all the cards (includes numbers)
     """
     _deck: List[Card]
-    _color: List[str]
+    _colors: List[str]
     _types: List[str]
+    _emoji: List[str]
 
     def __init__(self):
 
@@ -115,7 +116,6 @@ class Deck:
             self._deck.append(i)
 
         return self._deck
-
 
 
 class Hand:

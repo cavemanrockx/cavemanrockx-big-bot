@@ -19,7 +19,7 @@ class Uno:
     @commands.command()
     async def uno(self, ctx, bet):
 
-        embed = discord.Embed(title="", description=f"Uno game has started. Type {ctx.prefix}unojoin to join.", colour=discord.Color.red())
+        embed = discord.Embed(title="", description=f"Uno game has started. Type {ctx.prefix}unojoin to join. :", colour=discord.Color.red())
         embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
 
         await ctx.send(embed=embed)
@@ -50,10 +50,12 @@ class Uno:
 
         player = self.players[0]
 
-        while True:
-            hand = game.show_hand(player)
+
+
+        #while True:
+            #hand = game.show_hand(player)
             #show prompt in channel of player to pick card.
-            game.try_drop( player)
+            #game.try_drop( player, card)
 
 
 

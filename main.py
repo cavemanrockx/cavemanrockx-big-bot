@@ -11,7 +11,7 @@ load_dotenv()
 
 
 r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16113.c16.us-east-1-2.ec2.cloud.redislabs.com:16113/cavemanrockx-big-bot")
-bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."))
+bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."), case_insensitive=True)
 extensions = ["Uno"]
 TOKEN = os.getenv('token')
 
@@ -36,10 +36,20 @@ async def ping(ctx):
     await ctx.send("Pong!")
 
 
-@bot.command()
-async def test(ctx, *, word = ""):
+@bot.command(aliases=["say"])
+async def echo(ctx, *, word=""):
     embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
     embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+
+    await ctx.send(embed=embed)
+
+
+@bot.command(aliases=[])
+async def test(ctx, *, word=""):
+    emoji = ":red1:"
+    embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
+    embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+    #embed.add_field()
 
     await ctx.send(embed=embed)
 

@@ -53,6 +53,10 @@ async def test(ctx, *, word=""):
 
     await ctx.send(embed=embed)
 
+@bot.command()
+async def allemoji(ctx):
+
+    bot.get_all_emojis()
 
 @bot.command()
 async def load(extension):

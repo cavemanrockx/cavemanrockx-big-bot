@@ -15,11 +15,12 @@ class Card:
 
     _color: str
     _type: str
-    _image: str
+    _emoji: str
 
-    def __init__(self, color, type):
+    def __init__(self, color, type, emoji):
         self._color = color
         self._type = type
+        self._emoji = emoji
 
     def color_of(self):
         return self._color
@@ -60,7 +61,7 @@ class Deck:
     def __init__(self):
 
         self._deck = []
-        self._color = ["red","blue","green","yellow","black"]
+        self._color = ["red", "blue", "green", "yellow", "black"]
         self._types = []
 
         for i in range(10):

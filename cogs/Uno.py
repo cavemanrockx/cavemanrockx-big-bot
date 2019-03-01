@@ -19,14 +19,27 @@ class Uno:
     @commands.command()
     async def uno(self, ctx, bet=0):
 
-        embed = discord.Embed(title="", description=f"Uno game has started. Type {ctx.prefix}unojoin to join.", colour=discord.Color.red())
-        embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
+        counter = 0
 
-        await ctx.send(embed=embed)
-        self.players.append(ctx.author.name)
+        if ctx.author.name not in self.players:
+            self.players.append(ctx.author.name)
+
+            if not (counter == 1):
+                embed = discord.Embed(title="", description=f"Uno game has started. Type {ctx.prefix}unojoin to join.",
+                                    colour=discord.Color.red())
+                embed.set_author(name=self.bot.user.name, icon_url=self.bot.user.avatar_url)
+                await ctx.send(embed=embed)
+
+                counter += 1
+
+        else:
+            embed = discord.Embed(title="", description=f"You are already in the game.", colour=discord.Color.red())
+            await ctx.send(embed=embed)
+            return
+
 
         self.temp_bool = True
-        await asyncio.sleep(10)
+        await asyncio.sleep(30)
         self.temp_bool = False
 
         # Checks if there is enough players for the game
@@ -50,16 +63,13 @@ class Uno:
 
         player = self.players[0]
 
-
-
         #while True:
             #hand = game.show_hand(player)
             #show prompt in channel of player to pick card.
             #game.try_drop( player, card)
 
-
-
         self.players.clear()
+        counter = 0
 
     @commands.command()
     async def unojoin(self, ctx):

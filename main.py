@@ -12,7 +12,7 @@ load_dotenv()
 
 r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16113.c16.us-east-1-2.ec2.cloud.redislabs.com:16113/cavemanrockx-big-bot")
 bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."), case_insensitive=True)
-extensions = ["Uno"]
+extensions = ["memes.meme"]
 TOKEN = os.getenv('token')
 
 
@@ -53,10 +53,14 @@ async def test(ctx, *, word=""):
 
     await ctx.send(embed=embed)
 
-@bot.command()
-async def allemoji(ctx):
 
-    bot.get_all_emojis()
+@bot.command()
+async def time(ctx):
+    format = "%"
+    embed = discord.Embed(title="", description=f"{datetime.datetime.today()}, [CTS]", colour=discord.Color.green())
+    embed.set_author(name="Time")
+
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def load(extension):

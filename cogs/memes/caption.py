@@ -2,44 +2,36 @@ from PIL import Image, ImageFont, ImageDraw, ImageOps
 import requests
 from io import BytesIO
 from image_utils import ImageText
+from image_box import ImageTextBox
 
-def two_buttons(caption1, caption2):
+
+def two_buttons(caption1, caption2, url):
 
     img = Image.open("images/Two-Buttons.jpg")
 
-    layer1_w = 187
-    layer1_h = 88
-    layer1 = Image.new('RGBA', (layer1_w, layer1_h), (0, 0, 0, 100))
-    layer1draw = ImageDraw.Draw(layer1)
-    caption1_fs = 500
-    # font = ImageFont.truetype(<font-file>, <font-size>)
+    layer1_w = 194
+    layer1_h = 90
 
-    layer1_font = ImageFont.truetype("impact.ttf", caption1_fs)
-
-    # draw.text((x, y),"Sample Text",(r,g,b))
-
-    l1w, l1h = layer1draw.multiline_textsize(caption1, layer1_font)
-
-    while (l1w > layer1_w) or (l1h > layer1_h):
-        caption1_fs -= 10
-        if caption1_fs <= 10:
-            caption1_fs = 10
-        layer1_font = ImageFont.truetype("impact.ttf", caption1_fs)
-        l1w, l1h = layer1draw.multiline_textsize(caption1, layer1_font)
-
-
-    # layer1draw.text((0, 0), caption1, (0, 0, 0), font=font)
-
-    layer1draw.multiline_text((0, 0), caption1, (0, 0, 0), font=layer1_font, align="center")
-
+    layer1 = ImageTextBox(caption1, layer1_w, layer1_h)
+    layer1 = layer1.get_image()
     layer1 = layer1.rotate(16.4, expand=1)
-
     img.paste(layer1, (48, 64), layer1)
 
-    img.save('temp.jpg')
+    layer2_w = 144
+    layer2_h = 77
 
-    # response = requests.get(url)
-    # img = Image.open(BytesIO(response.content))
+    layer2 = ImageTextBox(caption2, layer2_w, layer1_h)
+    layer2 = layer2.get_image()
+    layer2 = layer2.rotate(18, expand=1)
+    img.paste(layer2, (241, 34), layer2)
+
+    response = requests.get(url)
+    layer3 = Image.open(BytesIO(response.content))
+    layer3.resize
+    img.paste(layer3, (206, 450, 403, 690), layer3)
+
+
+    img.save('temp.png')
 
 def two_buttons2(caption1, caption2):
 
@@ -56,10 +48,10 @@ def two_buttons2(caption1, caption2):
 
     img.paste(layer1, (48, 64, 100, 325), layer1)
 
-    img.save('temp.jpg')
+    img.save('temp.png')
 
     # response = requests.get(url)
     # img = Image.open(BytesIO(response.content))
 
-two_buttons("foo", "bar")
+two_buttons("Working on my project", "Working on leacture handout", "http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Male-Face-I3-icon.png")
 

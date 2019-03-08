@@ -78,7 +78,6 @@ class ImageTextBox(object):
         else:
             return (pos + h), lines, h
 
-
     def resize_to_fit(self):
         """
         Takes the text and breaks it down into multiple lines

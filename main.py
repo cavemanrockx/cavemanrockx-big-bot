@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import caption
 
 import chalk
 import datetime
@@ -9,7 +8,6 @@ import redis
 import os
 from dotenv import load_dotenv
 load_dotenv()
-
 
 r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16113.c16.us-east-1-2.ec2.cloud.redislabs.com:16113/cavemanrockx-big-bot")
 bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."), case_insensitive=True)

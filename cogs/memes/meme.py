@@ -33,13 +33,14 @@ class Meme:
         return location
 
     @commands.command()
-    async def twobuttons(self, ctx, *, word=""):
+    async def twobuttons(self, ctx, *, word="Putting enough captions,"
+                                            + "Being a fucking idiot, You"):
 
         captions = word.split(",")
 
         if len(captions) < 3:
-            await ctx.send("Add more shit idiot")
-            return
+            word = "Putting enough captions,Being a fucking idiot, You"
+            captions = word.split(",")
 
         location = self.save_file()
 
@@ -48,32 +49,21 @@ class Meme:
         await ctx.send(file=discord.File(location))
 
     @commands.command()
-    async def talkidiot(self, ctx, *, word=""):
-
-        captions = word.split(",")
-
-        if len(captions) < 1:
-            await ctx.send("All you had to do was add one caption")
-            return
+    async def talkidiot(self, ctx, *, word="I can't put captions on memes"):
 
         location = self.save_file()
 
-        caption.talk_idiot(captions[0], location)
+        caption.talk_idiot(word, location)
 
         await ctx.send(file=discord.File(location))
 
     @commands.command()
-    async def vr(self, ctx, *, word=""):
-
-        captions = word.split(",")
-
-        if len(captions) < 1:
-            await ctx.send("All you had to do was add one caption")
-            return
+    async def vr(self, ctx, *,
+                 word="You can't even get this simple command right"):
 
         location = self.save_file()
 
-        caption.vr(captions[0], location)
+        caption.vr(word, location)
 
         await ctx.send(file=discord.File(location))
 

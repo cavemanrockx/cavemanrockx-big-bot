@@ -1,10 +1,12 @@
 from typing import Tuple, Optional
 from PIL import Image, ImageFont, ImageDraw
+import os.path
 
 
 class ImageTextBox(object):
 
-    def __init__(self, text, width, height, fontfile="impact.ttf", background=(0, 0, 0, 0), font_size=1, align="center"):
+    def __init__(self, text, width, height, fontfile="impact.ttf",
+                 background=(0, 0, 0, 0), font_size=1, align="center"):
         self.text = text
         if self.text.strip(" ") == "":
             raise NoTextError
@@ -14,10 +16,10 @@ class ImageTextBox(object):
 
         self.background = background
         self.font_size = font_size
-        self.fontfile = fontfile
+        self.fontfile = os.path.join(os.path.dirname(__file__), f'fonts/{fontfile}')
         self.align = align
 
-        self.font = ImageFont.truetype(fontfile, self.font_size)
+        self.font = ImageFont.truetype(self.fontfile, self.font_size)
 
         self.img = Image.new('RGBA', (width, height), background)
         self.imgDraw = ImageDraw.Draw(self.img)

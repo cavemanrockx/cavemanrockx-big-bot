@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import caption
 
 import chalk
 import datetime
@@ -14,6 +15,8 @@ r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16
 bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."), case_insensitive=True)
 extensions = ["memes.meme"]
 TOKEN = os.getenv('token')
+
+img_num = 0
 
 
 @bot.event
@@ -43,21 +46,12 @@ async def echo(ctx, *, word=""):
 
     await ctx.send(embed=embed)
 
-
-@bot.command(aliases=[])
-async def test(ctx, *, word=""):
-    emoji = ":red1:"
-    embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
-    embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-    #embed.add_field()
-
-    await ctx.send(embed=embed)
-
-
 @bot.command()
 async def time(ctx):
-    format = "%"
-    embed = discord.Embed(title="", description=f"{datetime.datetime.today()}, [CTS]", colour=discord.Color.green())
+    date = str(datetime.datetime.today())
+    date = date.split(".")
+    date = date[0]
+    embed = discord.Embed(title="", description=f"{date} [EST]", colour=discord.Color.green())
     embed.set_author(name="Time")
 
     await ctx.send(embed=embed)
@@ -75,7 +69,7 @@ async def unload(extension):
     try:
         bot.unload_extension(f"cogs.{extension}")
     except Exception as error:
-        print(chalk.red(f"{extension} cannot be loaded. {error}"))
+        print(chalk.red(f"{extension} cannot be unloaded. {error}"))
 
 
 if __name__ == "__main__":

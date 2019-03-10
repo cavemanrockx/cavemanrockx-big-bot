@@ -1,57 +1,109 @@
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 import requests
 from io import BytesIO
-from image_utils import ImageText
 from image_box import ImageTextBox
+import os.path
 
 
-def two_buttons(caption1, caption2, url):
+def image_or_text(caption, w, h, font="impact.ttf"):
 
-    img = Image.open("images/Two-Buttons.jpg")
+    try:
+        response = requests.get(caption)
+        img = Image.open(BytesIO(response.content))
 
+        back = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+
+        if img.width > w or img.height > h:
+            img.thumbnail((w, h))
+            paste(back, img, (int((w - img.width) / 2), int((h - img.height) / 2)))
+            img = back
+        else:
+            img = img.resize((w, h))
+
+    except:
+        img = ImageTextBox(caption, w, h, fontfile=font)
+        img = img.get_image()
+
+    return img
+
+
+def paste(img, layer, loc):
+    try:
+        img.paste(layer, loc, layer)
+    except:
+        img.paste(layer, loc)
+
+
+def two_buttons(caption1, caption2, caption3, location):
+
+    img = Image.open(os.path.join(os.path.dirname(__file__), "images/Two-Buttons.jpg"))
+
+    # ========LAYER 1===========
     layer1_w = 194
     layer1_h = 90
 
-    layer1 = ImageTextBox(caption1, layer1_w, layer1_h)
-    layer1 = layer1.get_image()
+    layer1 = image_or_text(caption1, layer1_w, layer1_h)
     layer1 = layer1.rotate(16.4, expand=1)
-    img.paste(layer1, (48, 64), layer1)
 
+    layer1_loc = (48, 64)
+
+    paste(img, layer1, layer1_loc)
+
+    # ========LAYER 2===========
     layer2_w = 144
     layer2_h = 77
 
-    layer2 = ImageTextBox(caption2, layer2_w, layer1_h)
-    layer2 = layer2.get_image()
-    layer2 = layer2.rotate(18, expand=1)
-    img.paste(layer2, (241, 34), layer2)
+    layer2 = image_or_text(caption2, layer2_w, layer2_h)
+    layer2 = layer2.rotate(17, expand=1)
 
-    response = requests.get(url)
-    layer3 = Image.open(BytesIO(response.content))
-    layer3.resize
-    img.paste(layer3, (206, 450, 403, 690), layer3)
+    layer2_loc = (244, 40)
+
+    paste(img, layer2, layer2_loc)
+
+    # ========LAYER 3===========
+    layer3_size = (158, 177)
+    layer3 = image_or_text(caption3, layer3_size[0], layer3_size[1])
+
+    layer3_loc = (206, 480)
+
+    paste(img, layer3, layer3_loc)
+
+    # ==========================
+    img.save(os.path.join(os.path.dirname(__file__), location))
 
 
-    img.save('temp.png')
+def talk_idiot(caption1, location):
 
-def two_buttons2(caption1, caption2):
+    img = Image.open(os.path.join(os.path.dirname(__file__), "images/Talk-Idiot.jpg"))
 
-    img = Image.open("images/Two-Buttons.jpg")
+    # ========LAYER 1===========
+    layer1_w = 308
+    layer1_h = 78
 
-    layer1_w = 187
-    layer1_h = 88
-    layer1 = ImageText((layer1_w, layer1_h), background=(0, 0, 0, 200))
+    layer1 = image_or_text(caption1, layer1_w, layer1_h, font="digistrip.ttf")
 
-    #layer1.write_text_box(0, 0, caption1, box_width=layer1_w, color=(0, 0, 0),
-                          #font_filename="impact.tff", place="center")
-    #layer1.write_text_box(300, 275, caption1, box_width=200, font_filename="impact.ttf",
-                          #font_size=15, color=(0, 0, 0), place='justify')
+    layer1_loc = (20, 420)
 
-    img.paste(layer1, (48, 64, 100, 325), layer1)
+    paste(img, layer1, layer1_loc)
 
-    img.save('temp.png')
+    # ==========================
+    img.save(os.path.join(os.path.dirname(__file__), location))
 
-    # response = requests.get(url)
-    # img = Image.open(BytesIO(response.content))
 
-two_buttons("Working on my project", "Working on leacture handout", "http://icons.iconarchive.com/icons/hopstarter/face-avatars/128/Male-Face-I3-icon.png")
+def vr(caption1, location):
+
+    img = Image.open(os.path.join(os.path.dirname(__file__), "images/vr.jpg"))
+
+    # ========LAYER 1===========
+    layer1_w = 173
+    layer1_h = 59
+
+    layer1 = image_or_text(caption1, layer1_w, layer1_h)
+
+    layer1_loc = (39, 335)
+
+    paste(img, layer1, layer1_loc)
+
+    # ==========================
+    img.save(os.path.join(os.path.dirname(__file__), location))
 

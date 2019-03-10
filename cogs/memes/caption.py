@@ -1,7 +1,7 @@
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 import requests
 from io import BytesIO
-from image_box import ImageTextBox
+from cogs.memes.image_box import ImageTextBox
 import os.path
 
 

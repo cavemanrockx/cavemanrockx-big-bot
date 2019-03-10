@@ -1,6 +1,6 @@
 from typing import Dict, List
 from discord.ext import commands
-from memes import caption
+from cogs.memes import caption
 import os.path
 
 import discord

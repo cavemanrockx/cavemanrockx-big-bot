@@ -1,10 +1,9 @@
 from typing import Dict, List
 from discord.ext import commands
-import caption
+from memes import caption
 import os.path
 
 import discord
-import asyncio
 
 
 class Meme:

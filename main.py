@@ -54,18 +54,36 @@ async def time(ctx):
 
     await ctx.send(embed=embed)
 
-@bot.command()
-async def load(extension):
-    try:
-        bot.load_extension(f"cogs.{extension}")
-    except Exception as error:
-        print(chalk.red(f"{extension} cannot be loaded. {error}"))
 
+@bot.command()
+async def reload(ctx):
+
+    for extension in extensions:
+        try:
+            bot.unload_extension(f"cogs.{extension}")
+            print(chalk.green(f"cogs.{extension} unloaded"))
+            await ctx.send(f"cogs.{extension} unloaded")
+
+            bot.load_extension(f"cogs.{extension}")
+            print(chalk.green(f"cogs.{extension} loaded"))
+            await ctx.send(f"cogs.{extension} loaded")
+
+        except Exception as error:
+            print(chalk.red(f"{extension} cannot be loaded. {error}"))
+
+# @bot.command()
+# async def load(extension):
+#     try:
+#         bot.load_extension(f"cogs.{extension}")
+#         print(chalk.green(f"cogs.{extension} loaded"))
+#     except Exception as error:
+#         print(chalk.red(f"{extension} cannot be loaded. {error}"))
 
 @bot.command()
 async def unload(extension):
     try:
         bot.unload_extension(f"cogs.{extension}")
+        print(chalk.green(f"cogs.{extension} unloaded"))
     except Exception as error:
         print(chalk.red(f"{extension} cannot be unloaded. {error}"))
 

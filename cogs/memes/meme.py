@@ -32,40 +32,17 @@ class Meme:
 
         return location
 
-    @commands.command()
-    async def twobuttons(self, ctx, *, word="Putting enough captions,"
-                                            + "Being a fucking idiot, You"):
-
-        captions = word.split(",")
-
-        if len(captions) < 3:
-            word = "Putting enough captions,Being a fucking idiot, You"
-            captions = word.split(",")
+    @commands.command(aliases=["meme", "caption"])
+    async def memes(self, ctx, meme_name="", *, word=" "):
 
         location = self.save_file()
 
-        caption.two_buttons(captions[0], captions[1], captions[2], location)
-
-        await ctx.send(file=discord.File(location))
-
-    @commands.command()
-    async def talkidiot(self, ctx, *, word="I can't put captions on memes"):
-
-        location = self.save_file()
-
-        caption.talk_idiot(word, location)
-
-        await ctx.send(file=discord.File(location))
-
-    @commands.command()
-    async def vr(self, ctx, *,
-                 word="You can't even get this simple command right"):
-
-        location = self.save_file()
-
-        caption.vr(word, location)
-
-        await ctx.send(file=discord.File(location))
+        if caption.meme(meme_name, word, location):
+            await ctx.send(file=discord.File(location))
+        else:
+            l = caption.all_memes()
+            l = str(l)[10:-1]
+            await ctx.send(f"Meme doesn't exist. Here is a list of all memes: {l}")
 
 
 def setup(bot):

@@ -44,6 +44,7 @@ async def echo(ctx, *, word=""):
 
     await ctx.send(embed=embed)
 
+
 @bot.command()
 async def time(ctx):
     date = str(datetime.datetime.today())

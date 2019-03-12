@@ -3,7 +3,10 @@ import requests
 from io import BytesIO
 from cogs.memes.image_box import ImageTextBox
 import os.path
+import json
 
+with open(os.path.join(os.path.dirname(__file__),"images/images.json")) as f:
+    data = json.load(f)
 
 def image_or_text(caption, w, h, font="impact.ttf"):
 
@@ -34,76 +37,39 @@ def paste(img, layer, loc):
         img.paste(layer, loc)
 
 
-def two_buttons(caption1, caption2, caption3, location):
+def meme(meme_name, caption, location):
 
-    img = Image.open(os.path.join(os.path.dirname(__file__), "images/Two-Buttons.jpg"))
+    if meme_name in data:
+        layers = data[meme_name]["layers"]
+        file_loc = f"images/" + str(data[meme_name]["file"])
+        font = data[meme_name]["font"]
+    else:
+        return False
 
-    # ========LAYER 1===========
-    layer1_w = 194
-    layer1_h = 90
+    caption = caption.split(",")
 
-    layer1 = image_or_text(caption1, layer1_w, layer1_h)
-    layer1 = layer1.rotate(16.4, expand=1)
+    if len(caption) < len(layers):
+        caption = data[meme_name]["default"].split(",")
 
-    layer1_loc = (48, 64)
+    img = Image.open(os.path.join(os.path.dirname(__file__), file_loc))
 
-    paste(img, layer1, layer1_loc)
+    caption_num = 0
+    for l in layers:
+        size = layers[l]["size"]
+        loc = layers[l]["location"]
+        if caption[caption_num].strip != "*":
+            layer = image_or_text(caption[caption_num], size[0], size[1], font=font)
 
-    # ========LAYER 2===========
-    layer2_w = 144
-    layer2_h = 77
+            if "rotate" in layers[l]:
+                layer = layer.rotate(layers[l]["rotate"], expand=1)
 
-    layer2 = image_or_text(caption2, layer2_w, layer2_h)
-    layer2 = layer2.rotate(17, expand=1)
+            paste(img, layer, loc)
+        caption_num += 1
 
-    layer2_loc = (244, 40)
-
-    paste(img, layer2, layer2_loc)
-
-    # ========LAYER 3===========
-    layer3_size = (158, 177)
-    layer3 = image_or_text(caption3, layer3_size[0], layer3_size[1])
-
-    layer3_loc = (206, 480)
-
-    paste(img, layer3, layer3_loc)
-
-    # ==========================
     img.save(os.path.join(os.path.dirname(__file__), location))
+    return True
 
 
-def talk_idiot(caption1, location):
-
-    img = Image.open(os.path.join(os.path.dirname(__file__), "images/Talk-Idiot.jpg"))
-
-    # ========LAYER 1===========
-    layer1_w = 308
-    layer1_h = 78
-
-    layer1 = image_or_text(caption1, layer1_w, layer1_h, font="digistrip.ttf")
-
-    layer1_loc = (20, 420)
-
-    paste(img, layer1, layer1_loc)
-
-    # ==========================
-    img.save(os.path.join(os.path.dirname(__file__), location))
-
-
-def vr(caption1, location):
-
-    img = Image.open(os.path.join(os.path.dirname(__file__), "images/vr.jpg"))
-
-    # ========LAYER 1===========
-    layer1_w = 173
-    layer1_h = 59
-
-    layer1 = image_or_text(caption1, layer1_w, layer1_h)
-
-    layer1_loc = (39, 335)
-
-    paste(img, layer1, layer1_loc)
-
-    # ==========================
-    img.save(os.path.join(os.path.dirname(__file__), location))
+def all_memes():
+    return data.keys()
 

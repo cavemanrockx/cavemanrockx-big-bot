@@ -1,0 +1,102 @@
+{
+  "twobuttons": {
+    "layers": {
+      "layer1": {
+        "location": [
+          48,
+          64
+        ],
+        "size": [
+          194,
+          90
+        ],
+        "rotate": 16.4
+      },
+      "layer2": {
+        "location": [
+          244,
+          40
+        ],
+        "size": [
+          144,
+          77
+        ],
+        "rotate": 17
+      },
+      "layer3": {
+        "location": [
+          206,
+          480
+        ],
+        "size": [
+          158,
+          177
+        ]
+      }
+    },
+    "file": "Two-Buttons.jpg",
+    "default": "Adding enough captions,Being an idiot,You",
+    "font": "impact.ttf"
+  },
+  "vr": {
+    "layers": {
+      "layer1": {
+        "location": [
+          39,
+          338
+        ],
+        "size": [
+          173,
+          59
+        ]
+      }
+    },
+    "file": "vr.jpg",
+    "default": "You can't even get this right",
+    "font": "impact.ttf"
+  },
+  "talkidiot": {
+    "layers": {
+      "layer1": {
+        "location": [
+          20,
+          420
+        ],
+        "size": [
+          308,
+          78
+        ]
+      }
+    },
+    "file": "Talk-Idiot.jpg",
+    "default": "I can't even make a meme right",
+    "font": "digistrip.ttf"
+  },
+  "drake": {
+    "layers": {
+      "layer1": {
+        "location": [
+          343,
+          0
+        ],
+        "size": [
+          402,
+          373
+        ]
+      },
+      "layer2": {
+        "location":[
+          343,
+          369
+        ],
+        "size": [
+          373,
+          348
+        ]
+      }
+    },
+    "file": "drake.jpg",
+    "default": "Making a nice meme, Not putting enough captions",
+    "font": "impact.ttf"
+  }
+}

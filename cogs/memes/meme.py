@@ -41,7 +41,6 @@ class Meme:
             await ctx.send(file=discord.File(location))
         else:
             l = caption.all_memes()
-            l = str(l)[10:-1]
             await ctx.send(f"Meme doesn't exist. Here is a list of all memes: {l}")
 
 

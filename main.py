@@ -9,6 +9,11 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+#MemeBot
+#https://discordapp.com/oauth2/authorize?client_id=555164340999815230&scope=bot&permissions=515136
+#BigBot
+#https://discordapp.com/oauth2/authorize?client_id=537345378702589993&scope=bot&permissions=8
+
 r = redis.Redis.from_url(url="redis://:cWg97v6LkCWkkwZntYZEbocQ8DY0xlVG@redis-16113.c16.us-east-1-2.ec2.cloud.redislabs.com:16113/cavemanrockx-big-bot")
 bot = commands.Bot(command_prefix="-", activity=discord.Game(name="Starting..."), case_insensitive=True)
 extensions = ["memes.meme"]

@@ -47,29 +47,51 @@ def meme(meme_name, caption, location):
         return False
 
     caption = caption.split(",")
+    caption_count = 0
 
-    if len(caption) < len(layers):
+    for l in layers:
+        if "use_caption" not in layers[l]:
+            caption_count += 1
+
+    if len(caption) < caption_count:
         caption = data[meme_name]["default"].split(",")
 
     img = Image.open(os.path.join(os.path.dirname(__file__), file_loc))
 
     caption_num = 0
     for l in layers:
+        if "use_caption" in layers[l]:
+            index = layers[l]["use_caption"] - 1
+        else:
+            caption_num += 1
+            index = caption_num - 1
+
         size = layers[l]["size"]
         loc = layers[l]["location"]
-        if caption[caption_num].strip != "*":
-            layer = image_or_text(caption[caption_num], size[0], size[1], font=font)
+        if caption[index] != "*":
+            layer = image_or_text(caption[index],
+                                  size[0], size[1], font=font)
 
             if "rotate" in layers[l]:
                 layer = layer.rotate(layers[l]["rotate"], expand=1)
 
             paste(img, layer, loc)
-        caption_num += 1
 
     img.save(os.path.join(os.path.dirname(__file__), location))
     return True
 
 
 def all_memes():
-    return data.keys()
+    memes = ""
+    for key in data:
+        memes += f"{key} "
 
+    memes = memes.strip(" ")
+    memes = memes.replace(" ", ",")
+
+    return memes
+
+#
+# e = ImageTextBox("my name jkadhakjd, wdhjahd , dasdhaid ,as dahkd ald", 100, 200)
+# b = e.get_image()
+# b.save( "../../temp_img/temp.png")

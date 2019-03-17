@@ -8,7 +8,7 @@ import json
 with open(os.path.join(os.path.dirname(__file__),"images/images.json")) as f:
     data = json.load(f)
 
-def image_or_text(caption, w, h, font="impact.ttf"):
+def image_or_text(caption, w, h, font="impact.ttf", align="center"):
 
     try:
         response = requests.get(caption)
@@ -24,7 +24,7 @@ def image_or_text(caption, w, h, font="impact.ttf"):
             img = img.resize((w, h))
 
     except:
-        img = ImageTextBox(caption, w, h, fontfile=font)
+        img = ImageTextBox(caption, w, h, fontfile=font, align=align)
         img = img.get_image()
 
     return img
@@ -69,8 +69,12 @@ def meme(meme_name, caption, location):
         size = layers[l]["size"]
         loc = layers[l]["location"]
         if caption[index] != "*":
-            layer = image_or_text(caption[index],
-                                  size[0], size[1], font=font)
+            if "align" in layers[l]:
+                layer = image_or_text(caption[index],size[0], size[1],
+                                      font=font, align=layers[l]["align"])
+            else:
+                layer = image_or_text(caption[index], size[0], size[1],
+                                      font=font)
 
             if "rotate" in layers[l]:
                 layer = layer.rotate(layers[l]["rotate"], expand=1)
@@ -84,14 +88,14 @@ def meme(meme_name, caption, location):
 def all_memes():
     memes = ""
     for key in data:
-        memes += f"{key} "
+        memes += f"{key},"
 
-    memes = memes.strip(" ")
-    memes = memes.replace(" ", ",")
+    memes = memes.strip(",")
 
     return memes
 
-#
+
+
 # e = ImageTextBox("my name jkadhakjd, wdhjahd , dasdhaid ,as dahkd ald", 100, 200)
 # b = e.get_image()
 # b.save( "../../temp_img/temp.png")

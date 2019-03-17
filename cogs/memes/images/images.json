@@ -34,7 +34,7 @@
         ]
       }
     },
-    "file": "Two-Buttons.jpg",
+    "file": "twobuttons.jpg",
     "default": "Adding enough captions,Being an idiot,You",
     "font": "impact.ttf"
   },
@@ -68,7 +68,7 @@
         ]
       }
     },
-    "file": "Talk-Idiot.jpg",
+    "file": "talkidiot.jpg",
     "default": "I can't even make a meme right",
     "font": "digistrip.ttf"
   },
@@ -165,8 +165,75 @@
         ]
       }
     },
-    "file": "Prison.png",
+    "file": "prison.png",
     "default": "I tried to make a meme without captions, YOU",
+    "font": "Calibri.ttf"
+  },
+  "whowouldwin": {
+    "layers": {
+      "layer1": {
+        "location": [
+          1,
+          95
+        ],
+        "size": [
+          410,
+          402
+        ]
+      },
+      "layer2": {
+        "location":[
+          421,
+          95
+        ],
+        "size": [
+          379,
+          402
+        ]
+      }
+    },
+    "file": "whowouldwin.jpg",
+    "default": "A meme with enough captions, A meme with not enough captions",
+    "font": "Calibri.ttf"
+  },
+  "byemom": {
+    "layers": {
+      "layer1": {
+        "location": [
+          343,
+          436
+        ],
+        "size": [
+          355,
+          36
+        ],
+        "rotate": 24.75,
+        "align" : "left"
+      },
+      "layer2": {
+        "location": [
+          532,
+          18
+        ],
+        "size": [
+          67,
+          68
+        ]
+      },
+      "layer3": {
+        "use_caption": 2,
+        "location": [
+          72,
+          324
+        ],
+        "size": [
+          135,
+          142
+        ]
+      }
+    },
+    "file": "byemom.png",
+    "default": "How to fail at making a meme, You",
     "font": "Calibri.ttf"
   }
 }

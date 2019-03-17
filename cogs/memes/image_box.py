@@ -24,6 +24,7 @@ class ImageTextBox(object):
         self.img = Image.new('RGBA', (width, height), background)
         self.imgDraw = ImageDraw.Draw(self.img)
 
+        self.warp_text()
         self.resize_to_fit()
 
     def load(self):
@@ -35,6 +36,25 @@ class ImageTextBox(object):
     def get_image(self):
         return self.img
 
+    def warp_text(self):
+        """
+        >>> text = "Hello  my name  is Caveman "
+        >>> img = ImageTextBox(text, 100, 200)
+        >>> img.warp_text()
+        ['Hello', 'my', 'name', 'is', 'Caveman']
+
+        :return:
+        """
+        self.text = self.text.strip(" ")
+        self.text = self.text.split(" ")
+        index = 0
+        while index < len(self.text):
+            if self.text[index] == '':
+                self.text.pop(index)
+            else:
+                index += 1
+        return self.text
+
     def fit_text(self) -> Optional[Tuple]:
         """
         Takes the text and breaks it down into multiple lines
@@ -45,7 +65,7 @@ class ImageTextBox(object):
         >>> img = ImageTextBox(text, 100, 200)
         >>> img.fit_text()
         """
-        words = self.text.split(" ")
+        words = self.text
         lines = []
         temp_index = 0
 

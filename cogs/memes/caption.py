@@ -82,16 +82,38 @@ def meme(meme_name, caption, location):
 
 
 def all_memes():
-    memes = ""
+    memes = []
     for key in data:
-        memes += f"{key} "
-
-    memes = memes.strip(" ")
-    memes = memes.replace(" ", ",")
+        memes.append(key)
 
     return memes
 
-#
+
+def catalog():
+    memes = all_memes()
+
+    row_len = 5
+    w = int(1080/row_len)
+
+    back = Image.new('RGBA', (int(w*row_len), int((len(memes)/row_len)*320)), (255, 255, 255, 100))
+
+    h_factor = 300
+    h = 0
+
+    meme_num = 0
+    while meme_num != len(data):
+        for col in range(row_len):
+
+            img = Image.open(os.path.join(os.path.dirname(__file__), ))
+            img.thumbnail((w, h_factor))
+            loc_x = int((w*col) + ((w - img.width)/2))
+            loc_y = int(h + ((h_factor - img.height) / 2))
+            paste(back, img, (loc_x, loc_y))
+
+    return back
+
+
+
 # e = ImageTextBox("my name jkadhakjd, wdhjahd , dasdhaid ,as dahkd ald", 100, 200)
 # b = e.get_image()
 # b.save( "../../temp_img/temp.png")

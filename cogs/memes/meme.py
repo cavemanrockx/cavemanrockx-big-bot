@@ -17,6 +17,8 @@ class Meme:
         self.temp_bool = False
         self.players = []
         self.location = os.path.dirname(__file__)
+        caption.catalog()
+        self.catalog_loc = os.path.join(self.location, f"../../temp_img/catalog.png")
 
     def save_file(self):
 
@@ -33,11 +35,13 @@ class Meme:
         return location
 
     @commands.command(aliases=["meme", "caption"])
-    async def memes(self, ctx, meme_name="", *, word=" "):
+    async def memes(self, ctx, meme_name="help", *, word=" "):
 
         location = self.save_file()
 
-        if caption.meme(meme_name, word, location):
+        if meme_name.strip(" ") == "help":
+            await ctx.send(file=discord.File(self.catalog_loc))
+        elif caption.meme(meme_name, word, location):
             await ctx.send(file=discord.File(location))
         else:
             l = caption.all_memes()

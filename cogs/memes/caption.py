@@ -99,25 +99,45 @@ def catalog():
     row_len = 5
     w = int(1080/row_len)
 
-    back = Image.new('RGBA', (int(w*row_len), int((len(memes)/row_len)*320)), (255, 255, 255, 100))
+    pich_factor = 300
+    wordh_factor = 30
 
-    h_factor = 300
+    back_w = int(w*row_len)
+    back_h = int((len(memes)/row_len)+1)*(pich_factor + wordh_factor)
+
+    back = Image.new('RGBA', (back_w, back_h), (255, 255, 255, 255))
+    font = "Calibri.ttf"
     h = 0
 
     meme_num = 0
-    while meme_num != len(data):
+    while meme_num < len(data):
         for col in range(row_len):
 
-            img = Image.open(os.path.join(os.path.dirname(__file__), ))
-            img.thumbnail((w, h_factor))
+            file = data[memes[meme_num]]["file"]
+            img = Image.open(os.path.join(os.path.dirname(__file__),
+                                          f'images/{file}'))
+            img.thumbnail((w, pich_factor))
             loc_x = int((w*col) + ((w - img.width)/2))
-            loc_y = int(h + ((h_factor - img.height) / 2))
+            loc_y = int(h + ((pich_factor - img.height) / 2))
             paste(back, img, (loc_x, loc_y))
 
-    return back
+            des = ImageTextBox(memes[meme_num], w, wordh_factor,
+                               fontfile=font)
+            des = des.get_image()
+            paste(back, des, (loc_x, h + pich_factor))
+            meme_num += 1
+            if meme_num >= len(data):
+                break
 
+        h = h + pich_factor + wordh_factor
+
+    back.save(os.path.join(os.path.dirname(__file__), "../../temp_img/catalog.png"))
 
 
 # e = ImageTextBox("my name jkadhakjd, wdhjahd , dasdhaid ,as dahkd ald", 100, 200)
 # b = e.get_image()
 # b.save( "../../temp_img/temp.png")
+
+
+#b = catalog()
+#b.save( "../../temp_img/temp.png")

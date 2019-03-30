@@ -491,5 +491,34 @@
     "file": "borncool.jpg",
     "default": "People who caption memes",
     "font": "Calibri.ttf"
+  },
+  "changemymind": {
+    "layers": {
+      "layer1": {
+        "location": [
+          361,
+          282
+        ],
+        "size": [
+          285,
+          122
+        ],
+        "rotate" : 22.07
+      },
+      "layer2": {
+        "location": [
+          254,
+          148
+        ],
+        "size": [
+          55,
+          66
+        ],
+        "rotate": 29.05
+      }
+    },
+    "file": "changemymind.png",
+    "default": "I am not good at captions, You",
+    "font": "Calibri.ttf"
   }
 }

@@ -543,5 +543,22 @@
     "file": "bookofjokes.jpg",
     "default": "You are good at making memes",
     "font": "pixel.ttf"
+  },
+  "birthcontrol": {
+    "layers": {
+      "layer1": {
+        "location": [
+          511,
+          299
+        ],
+        "size": [
+          163,
+          204
+        ]
+      }
+    },
+    "file": "birthcontrol.jpg",
+    "default": "No Putting captions",
+    "font": "HelveticaNeueLight.ttf"
   }
 }

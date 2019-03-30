@@ -36,7 +36,7 @@
     },
     "file": "twobuttons.jpg",
     "default": "Adding enough captions,Being an idiot,You",
-    "font": "impact.ttf"
+    "font": "Calibri.ttf"
   },
   "vr": {
     "layers": {
@@ -53,7 +53,7 @@
     },
     "file": "vr.jpg",
     "default": "You can't even get this right",
-    "font": "impact.ttf"
+    "font": "Calibri.ttf"
   },
   "talkidiot": {
     "layers": {
@@ -118,7 +118,7 @@
     },
     "file": "drake.jpg",
     "default": "Making a nice meme, Not putting enough captions,YOU",
-    "font": "impact.ttf"
+    "font": "Calibri.ttf"
   },
   "prison": {
     "layers": {
@@ -273,5 +273,22 @@
     "file": "itsretarded.png",
     "default": "Using a meme command is hard, You",
     "font": "timesnewroman.ttf"
+  },
+  "duo": {
+    "layers": {
+      "layer1": {
+        "location": [
+          212,
+          442
+        ],
+        "size": [
+          410,
+          129
+        ]
+      }
+    },
+    "file": "duo.png",
+    "default": "Learn to put captions",
+    "font": "Calibri.ttf"
   }
 }

@@ -77,7 +77,7 @@ def meme(meme_name, caption, location):
 
         # main block when caption exists
 
-        if caption[index] != "*":
+        if caption[index].strip(" ") != "*":
             align = "center"
             color = "black"
             if "align" in layers[l]:

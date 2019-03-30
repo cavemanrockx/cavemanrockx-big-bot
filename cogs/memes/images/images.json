@@ -317,5 +317,32 @@
     "file": "fancypooh.jpg",
     "default": "Not using the right amount of captions, making memes right",
     "font": "Calibri.ttf"
+  },
+  "surprisedpika": {
+    "layers": {
+      "layer1": {
+        "location": [
+          16,
+          34
+        ],
+        "size": [
+          708,
+          155
+        ]
+      },
+      "layer2": {
+        "location": [
+          16,
+          183
+        ],
+        "size": [
+          714,
+          69
+        ]
+      }
+    },
+    "file": "surprisedpika.png",
+    "default": "*meme command not working*, You:",
+    "font": "Calibri.ttf"
   }
 }

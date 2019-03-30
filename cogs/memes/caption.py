@@ -171,6 +171,23 @@ def catalog():
     back.save(os.path.join(os.path.dirname(__file__), "../../temp_img/catalog.png"))
 
 
+def seal(url, location):
+    seal = Image.open(os.path.join(os.path.dirname(__file__), "images/seal.png"))
+
+    try:
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+    except:
+        return False
+
+    seal.thumbnail((img.width*0.05, img.height*0.05))
+    x = img.width - seal.width - 10
+    y = img.height - seal.height - 10
+    paste(img, seal, (x, y))
+
+    img.save(os.path.join(os.path.dirname(__file__), location))
+    return True
+
 # e = ImageTextBox("my name jkadhakjd, wdhjahd , dasdhaid ,as dahkd ald", 100, 200)
 # b = e.get_image()
 # b.save( "../../temp_img/temp.png")

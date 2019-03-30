@@ -48,6 +48,19 @@ class Meme:
             l = str(l)[1:-1]
             await ctx.send(f"Meme doesn't exist. Here is a list of all memes: {l}")
 
+    @commands.command()
+    async def seal(self, ctx, *, url=""):
+
+        location = self.save_file()
+        if len(ctx.message.attachments) > 0:
+            url = ctx.message.attachments[0].url
+        else:
+            url = url
+
+        if caption.seal(url, location):
+            await ctx.send(file=discord.File(location))
+        else:
+            await ctx.send(f"Please input a valid link or image attachment")
 
 def setup(bot):
     bot.add_cog(Meme(bot))

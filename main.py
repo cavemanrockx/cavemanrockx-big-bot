@@ -45,7 +45,7 @@ async def ping(ctx):
 
 @bot.command(aliases=["say"])
 async def echo(ctx, *, word=""):
-    embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
+    embed = discord.Embed(title="", description=f"{word} {ctx.message.attachments[0].url}", colour=discord.Color.green())
     embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 
     await ctx.send(embed=embed)

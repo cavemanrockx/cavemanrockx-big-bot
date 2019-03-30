@@ -48,6 +48,10 @@ def meme(meme_name, caption, location):
         return False
 
     caption = caption.split(",")
+    for i in range(len(caption)):
+        if caption[i].strip(" ") == "":
+            caption.pop(i)
+
     caption_count = 0
 
     # for the caption count that needs to be accepted

@@ -290,5 +290,32 @@
     "file": "duo.png",
     "default": "Learn to put captions",
     "font": "Calibri.ttf"
+  },
+  "fancypooh": {
+    "layers": {
+      "layer1": {
+        "location": [
+          339,
+          0
+        ],
+        "size": [
+          411,
+          278
+        ]
+      },
+      "layer2": {
+        "location": [
+          340,
+          280
+        ],
+        "size": [
+          410,
+          274
+        ]
+      }
+    },
+    "file": "fancypooh.png",
+    "default": "Not using the right amount of captions, making memes right",
+    "font": "Calibri.ttf"
   }
 }

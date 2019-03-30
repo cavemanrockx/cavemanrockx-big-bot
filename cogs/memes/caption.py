@@ -105,7 +105,7 @@ def catalog():
     border_width = 8
 
     back_w = int(w*row_len) + (border_width*(row_len+1))
-    back_h = int((len(memes)/row_len)+1) * \
+    back_h = int(len(memes)/row_len)+1 * \
                 (pich_factor + wordh_factor + border_width)
     back_h += border_width
 

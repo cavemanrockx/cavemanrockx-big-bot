@@ -8,7 +8,8 @@ import json
 with open(os.path.join(os.path.dirname(__file__),"images/images.json")) as f:
     data = json.load(f)
 
-def image_or_text(caption, w, h, font="impact.ttf", align="center"):
+
+def image_or_text(caption, w, h, font="impact.ttf", align="center", color="black"):
 
     try:
         response = requests.get(caption)
@@ -24,7 +25,7 @@ def image_or_text(caption, w, h, font="impact.ttf", align="center"):
             img = img.resize((w, h))
 
     except:
-        img = ImageTextBox(caption, w, h, fontfile=font, align=align)
+        img = ImageTextBox(caption, w, h, fontfile=font, align=align, color=color)
         img = img.get_image()
 
     return img
@@ -49,6 +50,7 @@ def meme(meme_name, caption, location):
     caption = caption.split(",")
     caption_count = 0
 
+    # for the caption count that needs to be accepted
     for l in layers:
         if "use_caption" not in layers[l]:
             caption_count += 1
@@ -68,14 +70,20 @@ def meme(meme_name, caption, location):
 
         size = layers[l]["size"]
         loc = layers[l]["location"]
-        if caption[index] != "*":
-            if "align" in layers[l]:
-                layer = image_or_text(caption[index],size[0], size[1],
-                                      font=font, align=layers[l]["align"])
-            else:
-                layer = image_or_text(caption[index], size[0], size[1],
-                                      font=font)
 
+        # main block when caption exists
+
+        if caption[index] != "*":
+            align = "center"
+            color = "black"
+            if "align" in layers[l]:
+                align = layers[l]["align"]
+
+            if "color" in layers[l]:
+                color = layers[l]["color"]
+
+            layer = image_or_text(caption[index], size[0], size[1],
+                                  font=font, align=align, color=color)
             if "rotate" in layers[l]:
                 layer = layer.rotate(layers[l]["rotate"], expand=1)
 

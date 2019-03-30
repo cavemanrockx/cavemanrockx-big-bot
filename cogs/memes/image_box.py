@@ -6,7 +6,7 @@ import os.path
 class ImageTextBox(object):
 
     def __init__(self, text, width, height, fontfile="impact.ttf",
-                 background=(0, 0, 0, 0), font_size=1, align="center"):
+                 background=(0, 0, 0, 0), font_size=1, align="center", color="black"):
         self.text = text
         if self.text.strip(" ") == "":
             raise NoTextError
@@ -18,6 +18,7 @@ class ImageTextBox(object):
         self.font_size = font_size
         self.fontfile = os.path.join(os.path.dirname(__file__), f'fonts/{fontfile}')
         self.align = align
+        self.color = color
 
         self.font = ImageFont.truetype(self.fontfile, self.font_size)
 
@@ -125,29 +126,26 @@ class ImageTextBox(object):
 
         pos = (self.height - (len(lines)*text_height))/2
 
-        if self.align.lower() == "center":
-            for i in lines:
-                i = i.strip(" ")
-                w, h = self.imgDraw.textsize(i, self.font)
-                self.imgDraw.text(((self.width - w)/2, pos), i, (0, 0, 0),
-                                  font=self.font)
-                pos += text_height
+        color = {"white": (255, 255, 255), "black": (0, 0, 0)}
+        for i in lines:
 
-        elif self.align.lower() == "left":
-            for i in lines:
-                i = i.strip(" ")
-                self.imgDraw.text((0, pos), i, (0, 0, 0), font=self.font)
-                pos += text_height
+            i = i.strip(" ")
+            w, h = self.imgDraw.textsize(i, self.font)
 
-        elif self.align.lower() == "right":
-            for i in lines:
-                i = i.strip(" ")
-                w, h = self.imgDraw.textsize(i, self.font)
-                self.imgDraw.text(((self.width-w), pos), i, (0, 0, 0),
-                                  font=self.font)
-                pos += text_height
-        else:
-            raise InvalidAlignType
+            if self.align.lower() == "center":
+                align_coords = (self.width - w)/2
+            elif self.align.lower() == "left":
+                align_coords = 0
+            elif self.align.lower() == "right":
+                align_coords = (self.width-w)
+            else:
+                raise InvalidAlignType
+
+            self.imgDraw.text((align_coords, pos), i, color[self.color],
+                              font=self.font)
+            pos += text_height
+
+
 
 
 class NoTextError(Exception):

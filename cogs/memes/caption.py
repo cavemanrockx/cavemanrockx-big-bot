@@ -102,34 +102,54 @@ def catalog():
     pich_factor = 300
     wordh_factor = 30
 
-    back_w = int(w*row_len)
-    back_h = int((len(memes)/row_len)+1)*(pich_factor + wordh_factor)
+    border_width = 8
 
-    back = Image.new('RGBA', (back_w, back_h), (255, 255, 255, 255))
+    back_w = int(w*row_len) + (border_width*(row_len+1))
+    back_h = int((len(memes)/row_len)+1) * \
+                (pich_factor + wordh_factor + border_width)
+    back_h += border_width
+
+    back = Image.new('RGBA', (back_w, back_h), (131, 131, 131, 255))
     font = "Calibri.ttf"
+
+    border_x = Image.new('RGBA', (back_w, border_width), (0, 0, 0, 255))
+    border_y = Image.new('RGBA', (border_width, back_h), (0, 0, 0, 255))
     h = 0
 
     meme_num = 0
     while meme_num < len(data):
+        paste(back, border_x, (0, h))
+        h += border_width
         for col in range(row_len):
 
+            # Image
             file = data[memes[meme_num]]["file"]
             img = Image.open(os.path.join(os.path.dirname(__file__),
                                           f'images/{file}'))
             img.thumbnail((w, pich_factor))
-            loc_x = int((w*col) + ((w - img.width)/2))
+            loc_x = int((w*col) + (w - img.width)/2)
+            loc_x += border_width*(col + 1)
             loc_y = int(h + ((pich_factor - img.height) / 2))
             paste(back, img, (loc_x, loc_y))
 
+            # Text
             des = ImageTextBox(memes[meme_num], w, wordh_factor,
                                fontfile=font)
             des = des.get_image()
             paste(back, des, (loc_x, h + pich_factor))
             meme_num += 1
+
             if meme_num >= len(data):
                 break
 
         h = h + pich_factor + wordh_factor
+
+    paste(back, border_x, (border_width, h))
+
+    loc = 0
+    for x in range(row_len + 1):
+        paste(back, border_y, (loc, 0))
+        loc += (border_width + w)
 
     back.save(os.path.join(os.path.dirname(__file__), "../../temp_img/catalog.png"))
 
@@ -139,5 +159,5 @@ def catalog():
 # b.save( "../../temp_img/temp.png")
 
 
-#b = catalog()
-#b.save( "../../temp_img/temp.png")
+# b = catalog()
+# b.save( "../../temp_img/temp.png")

@@ -235,5 +235,43 @@
     "file": "byemom.png",
     "default": "How to fail at making a meme, You",
     "font": "Calibri.ttf"
+  },
+  "itsretarded": {
+    "layers": {
+      "layer1": {
+        "location": [
+          340,
+          64
+        ],
+        "size": [
+          283,
+          68
+        ]
+      },
+      "layer2": {
+        "location": [
+          207,
+          238
+        ],
+        "size": [
+          68,
+          68
+        ]
+      },
+      "layer3": {
+        "use_caption": 2,
+        "location": [
+          360,
+          129
+        ],
+        "size": [
+          181,
+          180
+        ]
+      }
+    },
+    "file": "itsretarded.png",
+    "default": "Using a meme command is hard, You",
+    "font": "timesnewroman.ttf"
   }
 }

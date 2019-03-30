@@ -180,7 +180,7 @@ def seal(url, location):
     except:
         return False
 
-    seal.thumbnail((img.width*0.3, img.height*0.1))
+    seal.thumbnail((img.width*0.35, img.height*0.2))
     x = img.width - seal.width - 10
     y = img.height - seal.height - 10
     paste(img, seal, (x, y))

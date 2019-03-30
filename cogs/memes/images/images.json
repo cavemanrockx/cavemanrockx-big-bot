@@ -328,7 +328,8 @@
         "size": [
           708,
           155
-        ]
+        ],
+        "align" : "left"
       },
       "layer2": {
         "location": [
@@ -338,11 +339,139 @@
         "size": [
           714,
           69
-        ]
+        ],
+        "align" : "left"
       }
     },
     "file": "surprisedpika.png",
     "default": "*meme command not working*, You:",
     "font": "Calibri.ttf"
-  }
+  },
+  "6stones": {
+    "layers": {
+      "layer1": {
+        "location": [
+          38,
+          12
+        ],
+        "size": [
+          106,
+          104
+        ]
+      },
+      "layer2": {
+        "location": [
+          248,
+          30
+        ],
+        "size": [
+          109,
+          96
+        ]
+      },
+      "layer3": {
+        "location": [
+          143,
+          146
+        ],
+        "size": [
+          125,
+          85
+        ]
+      },
+      "layer4": {
+        "location": [
+          67,
+          250
+        ],
+        "size": [
+          88,
+          75
+        ]
+      },
+      "layer5": {
+        "location": [
+          310,
+          190
+        ],
+        "size": [
+          111,
+          98
+        ]
+      },
+      "layer6": {
+        "location":[
+          208,
+          309
+        ],
+        "size": [
+          110,
+          103
+        ]
+      },
+      "layer7": {
+        "location": [
+          93,
+          427
+        ],
+        "size": [
+          127,
+          109
+        ]
+      }
+    },
+    "file": "6stones.jpg",
+    "default": "*,*,There is a total of 7 captions,*,*,*,*",
+    "font": "Calibri.ttf"
+  },
+  "fantasy": {
+    "layers": {
+      "layer1": {
+        "location": [
+          155,
+          490
+        ],
+        "size": [
+          95,
+          73
+        ]
+      },
+      "layer2": {
+        "location": [
+          357,
+          96
+        ],
+        "size": [
+          62,
+          60
+        ]
+      },
+      "layer3": {
+        "use_caption": 2,
+        "location": [
+          32,
+          414
+        ],
+        "size": [
+          96,
+          86
+        ]
+      },
+      "layer4": {
+        "use_caption": 2,
+        "location": [
+          603,
+          471
+        ],
+        "size": [
+          49,
+          43
+        ]
+      }
+    },
+    "file": "fantasy.png",
+    "default": "memes with no caption, You:",
+    "font": "Calibri.ttf"
+  },
+  
 }

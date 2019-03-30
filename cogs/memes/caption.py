@@ -96,7 +96,7 @@ def all_memes():
 def catalog():
     memes = all_memes()
 
-    row_len = 5
+    row_len = 6
     w = int(1080/row_len)
 
     pich_factor = 300
@@ -105,8 +105,13 @@ def catalog():
     border_width = 8
 
     back_w = int(w*row_len) + (border_width*(row_len+1))
-    back_h = int(len(memes)/row_len)+1 * \
-                (pich_factor + wordh_factor + border_width)
+
+    if len(memes)/row_len == 0:
+        bach_h_size = int(len(memes)/row_len)
+    else:
+        bach_h_size = int(len(memes)/row_len) + 1
+
+    back_h = bach_h_size * (pich_factor + wordh_factor + border_width)
     back_h += border_width
 
     back = Image.new('RGBA', (back_w, back_h), (131, 131, 131, 255))

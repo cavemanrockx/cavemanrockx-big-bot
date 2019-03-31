@@ -35,12 +35,32 @@ class Meme:
         return location
 
     @commands.command(aliases=["meme", "caption"])
-    async def memes(self, ctx, meme_name="help", *, word=" "):
+    async def memes(self, ctx, meme_name="help", *, word=""):
 
         location = self.save_file()
 
-        if meme_name.strip(" ") == "help":
+        if meme_name.strip(" ").lower() == "help":
             await ctx.send(file=discord.File(self.catalog_loc))
+
+        elif meme_name.strip(" ").lower() == "customtoptext":
+            if len(ctx.message.attachments) > 0:
+                url = ctx.message.attachments[0].url
+
+            elif len(word.split(",")) > 1:
+                temp_word = word.split(",")[0]
+                temp_word = temp_word.strip(" ")
+                url = temp_word
+                word = word[word.index(",")+1:]
+            else:
+                await ctx.send(f"Please input a valid link or image attachment "
+                               f"and caption")
+                return
+
+            if caption.customtoptext(url, word, location):
+                await ctx.send(file=discord.File(location))
+            else:
+                await ctx.send(f"Please input a valid link or image attachment")
+
         elif caption.meme(meme_name, word, location):
             await ctx.send(file=discord.File(location))
         else:

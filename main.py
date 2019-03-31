@@ -34,6 +34,8 @@ async def on_message(message):
 
     if message.author == bot.user:
         return
+    #if message.author.name in r.get("banned_users"):
+        #return
 
     await bot.process_commands(message)
 
@@ -45,11 +47,14 @@ async def ping(ctx):
 
 @bot.command(aliases=["say"])
 async def echo(ctx, *, word=""):
-    embed = discord.Embed(title="", description=f"{word} {ctx.message.attachments[0].url}", colour=discord.Color.green())
+    #ctx.message.attachments[0].url
+
+    user = r.lrange("banned_users", 0, r.llen("banned_users"))
+
+    embed = discord.Embed(title="", description=f"{word}", colour=discord.Color.green())
     embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 
     await ctx.send(embed=embed)
-
 
 @bot.command()
 async def time(ctx):

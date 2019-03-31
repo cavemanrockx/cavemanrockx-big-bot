@@ -5,7 +5,7 @@ from cogs.memes.image_box import ImageTextBox
 import os.path
 import json
 
-with open(os.path.join(os.path.dirname(__file__),"images/images.json")) as f:
+with open(os.path.join(os.path.dirname(__file__), "images/images.json")) as f:
     data = json.load(f)
 
 
@@ -41,9 +41,19 @@ def paste(img, layer, loc):
 def meme(meme_name, caption, location):
 
     if meme_name in data:
-        layers = data[meme_name]["layers"]
-        file_loc = f"images/" + str(data[meme_name]["file"])
-        font = data[meme_name]["font"]
+        if "top_text_meme" in data[meme_name]:
+            file_loc = f"images/" + str(data[meme_name]["file"])
+
+            img = Image.open(os.path.join(os.path.dirname(__file__), file_loc))
+
+            img = toptextmeme(img, caption)
+            img.save(os.path.join(os.path.dirname(__file__), location))
+            return True
+        else:
+            layers = data[meme_name]["layers"]
+            file_loc = f"images/" + str(data[meme_name]["file"])
+            font = data[meme_name]["font"]
+            img = Image.open(os.path.join(os.path.dirname(__file__), file_loc))
     else:
         return False
 
@@ -62,8 +72,6 @@ def meme(meme_name, caption, location):
     if len(caption) < caption_count:
         caption = data[meme_name]["default"].split(",")
 
-    img = Image.open(os.path.join(os.path.dirname(__file__), file_loc))
-
     caption_num = 0
     for l in layers:
         if "use_caption" in layers[l]:
@@ -76,10 +84,10 @@ def meme(meme_name, caption, location):
         loc = layers[l]["location"]
 
         # main block when caption exists
-
         if caption[index].strip(" ") != "*":
             align = "center"
             color = "black"
+
             if "align" in layers[l]:
                 align = layers[l]["align"]
 
@@ -92,6 +100,55 @@ def meme(meme_name, caption, location):
                 layer = layer.rotate(layers[l]["rotate"], expand=1)
 
             paste(img, layer, loc)
+
+    img.save(os.path.join(os.path.dirname(__file__), location))
+    return True
+
+
+def toptextmeme(img, caption):
+
+    back_w = 745
+    back_h = 842
+    back = Image.new('RGBA', (back_w, back_h), (255, 255, 255, 255))
+
+    img_w, img_h = 719, 574
+    if img.width > img_w or img.height > img_h:
+        img.thumbnail((img_w, img_h))
+    else:
+        img = img.resize((img_w, img_h))
+
+    paste(back, img, (13, 257))
+
+    caption = caption.split(",")
+    for i in range(len(caption)):
+        if caption[i].strip(" ") == "":
+            caption.pop(i)
+
+    if len(caption) == 0:
+        return back
+
+    text_w, text_h = 714, 241
+
+    line_h = int(text_h/len(caption))
+    text_pos = [14, 12]
+    for c in caption:
+        layer = image_or_text(c, text_w, line_h,
+                              font="Calibri.ttf", align="left", color="black")
+        paste(back, layer, (text_pos[0], text_pos[1]))
+        text_pos[1] += line_h
+
+    return back
+
+
+def customtoptext(url, captions, location):
+
+    try:
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+    except:
+        return False
+
+    img = toptextmeme(img, captions)
 
     img.save(os.path.join(os.path.dirname(__file__), location))
     return True
@@ -118,7 +175,7 @@ def catalog():
 
     back_w = int(w*row_len) + (border_width*(row_len+1))
 
-    if len(memes)/row_len == 0:
+    if len(memes) % row_len == 0:
         bach_h_size = int(len(memes)/row_len)
     else:
         bach_h_size = int(len(memes)/row_len) + 1

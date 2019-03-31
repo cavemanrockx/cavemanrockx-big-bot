@@ -116,8 +116,10 @@ def toptextmeme(img, caption):
         img.thumbnail((img_w, img_h))
     else:
         img = img.resize((img_w, img_h))
+    img_loc = [13 + int((img_w - img.width)/2),
+               257 + int((img_h - img.height)/2)]
 
-    paste(back, img, (13, 257))
+    paste(back, img, (img_loc[0], img_loc[1]))
 
     caption = caption.split(",")
     for i in range(len(caption)):
@@ -180,14 +182,18 @@ def catalog():
     else:
         bach_h_size = int(len(memes)/row_len) + 1
 
+    notes_line_h = 50
+    notes_height = (2*notes_line_h) + border_width
+
     back_h = bach_h_size * (pich_factor + wordh_factor + border_width)
-    back_h += border_width
+    back_h += border_width + notes_height
 
     back = Image.new('RGBA', (back_w, back_h), (131, 131, 131, 255))
     font = "Calibri.ttf"
 
     border_x = Image.new('RGBA', (back_w, border_width), (0, 0, 0, 255))
-    border_y = Image.new('RGBA', (border_width, back_h), (0, 0, 0, 255))
+    border_y = Image.new('RGBA', (border_width, back_h - notes_height),
+                         (0, 0, 0, 255))
     h = 0
 
     meme_num = 0
@@ -219,11 +225,22 @@ def catalog():
         h = h + pich_factor + wordh_factor
 
     paste(back, border_x, (border_width, h))
+    h += border_width
 
     loc = 0
     for x in range(row_len + 1):
         paste(back, border_y, (loc, 0))
         loc += (border_width + w)
+
+    notes = ["-Use <*> to skip captions",
+             "-Use <customtoptext> to make custom top text memes"]
+
+    for note in notes:
+        des = ImageTextBox(note, back_w - (2 * border_width),
+                       notes_line_h - 5, align="left", fontfile="Calibri.ttf")
+        des = des.get_image()
+        paste(back, des, (border_width + 10, h + 5))
+        h += notes_line_h
 
     back.save(os.path.join(os.path.dirname(__file__), "../../temp_img/catalog.png"))
 

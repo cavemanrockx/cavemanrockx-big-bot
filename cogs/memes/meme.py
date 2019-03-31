@@ -54,6 +54,8 @@ class Meme:
             else:
                 await ctx.send(f"Please input a valid link or image attachment "
                                f"and caption")
+                await ctx.send(f"Usage: -meme customtoptext url, caption or")
+                await ctx.send(f"-meme customtoptext caption (with an attachment)")
                 return
 
             if caption.customtoptext(url, word, location):

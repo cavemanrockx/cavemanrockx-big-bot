@@ -320,35 +320,6 @@
     "default": "Not using the right amount of captions, making memes right",
     "font": "Calibri.ttf"
   },
-  "surprisedpika": {
-    "layers": {
-      "layer1": {
-        "location": [
-          16,
-          34
-        ],
-        "size": [
-          708,
-          155
-        ],
-        "align" : "left"
-      },
-      "layer2": {
-        "location": [
-          16,
-          183
-        ],
-        "size": [
-          714,
-          69
-        ],
-        "align" : "left"
-      }
-    },
-    "file": "surprisedpika.png",
-    "default": "*meme command not working*, You:",
-    "font": "Calibri.ttf"
-  },
   "6stones": {
     "layers": {
       "layer1": {
@@ -567,5 +538,13 @@
   "unlimitedpower": {
     "top_text_meme" : 0,
     "file": "unlimitedpower.png"
+  },
+  "shockedtom": {
+    "top_text_meme": 0,
+    "file": "shockedtom.jpeg"
+  },
+  "surprisedpika": {
+    "top_text_meme": 0,
+    "file": "surprisedpika.png"
   }
 }

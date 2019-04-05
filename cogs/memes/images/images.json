@@ -532,8 +532,25 @@
       }
     },
     "file": "birthcontrol.jpg",
-    "default": "No Putting captions",
+    "default": "Not Putting captions",
     "font": "HelveticaNeueLight.ttf"
+  },
+  "jars": {
+    "layers": {
+      "layer1": {
+        "location": [
+          415,
+          137
+        ],
+        "size": [
+          223,
+          175
+        ]
+      }
+    },
+    "file": "jars.png",
+    "default": "Not putting captions",
+    "font": "Calibri.ttf"
   },
   "unlimitedpower": {
     "top_text_meme" : 0,

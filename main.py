@@ -38,7 +38,7 @@ async def on_message(message):
 
     if str(message.author) in asser:
         await message.delete()
-        await message.channel.send("No")
+        await message.channel.send("Cool 🖕")
 
     #if message.author.name in r.get("banned_users"):
         #return
@@ -56,7 +56,6 @@ async def assadd(ctx, *, word):
     if str(ctx.author) == "Cavemanrockx#6274":
         asser.append(word)
         await ctx.send(asser)
-
 
 
 @bot.command()

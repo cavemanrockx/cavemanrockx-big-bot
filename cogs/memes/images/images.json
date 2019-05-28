@@ -535,6 +535,24 @@
     "default": "No Putting captions",
     "font": "HelveticaNeueLight.ttf"
   },
+  "virgin":{
+    "layers":{
+      "layer1": {
+        "location": [
+          144,
+          465
+        ],
+        "size": [
+          101,
+          110
+        ],
+        "color": "white"
+      }
+    },
+    "file": "virgin.png",
+    "default": "You",
+    "font": "HelveticaNeueLight.ttf"
+},
   "unlimitedpower": {
     "top_text_meme" : 0,
     "file": "unlimitedpower.png"

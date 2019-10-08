@@ -570,6 +570,37 @@
     "default": "You",
     "font": "HelveticaNeueLight.ttf"
   },
+  "difference": {
+    "layers": {
+      "layer1": {
+        "location": [
+          22,
+          13
+        ],
+        "size": [
+          216,
+          176
+        ],
+        "rotate": -16.17,
+        "color": "black"
+      },
+      "layer2": {
+        "location": [
+          261,
+          37
+        ],
+        "size": [
+          238,
+          187
+        ],
+        "rotate": -15.66,
+        "color": "black"
+      }
+    },
+    "file": "difference.png",
+    "default": "Not adding 2 captions, Adding 2 captions",
+    "font": "HelveticaNeueLight.ttf"
+  },
   "unlimitedpower": {
     "top_text_meme" : 0,
     "file": "unlimitedpower.png"
